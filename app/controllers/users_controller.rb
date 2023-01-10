@@ -1,4 +1,4 @@
-class EventsController < ActionController::Base
+class UsersController < ActionController::Base
 
     def index
 
@@ -23,4 +23,5 @@ class EventsController < ActionController::Base
     def update
 
     end
+
 end
