@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
-    <%= link_to 'UPCOMING', 'root_route', class:"navbar-brand"  %>
+    <%= link_to 'UPCOMING', root_url, class:"navbar-brand"  %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -8,21 +8,38 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">EVENTS</a>
+          <%= link_to "EVENTS", root_url, class:"nav-link active" %>
+          
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">DATES</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            USER
+
+          <% if user_signed_in?%>          
+          
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Welcome <%= current_user.email %>
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">LOG IN</a></li>
-            <li><a class="dropdown-item" href="#">SIGN UP</a></li>
+            <li><%= link_to "User Profile", current_user, class:"dropdown-item" %> 
+            <li><%= link_to "Your Events", users_path, class:"dropdown-item" %>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">LOG OUT</a></li>
+            <li><%= link_to "Sign out", destroy_user_session_path, method: :delete, class:"dropdown-item" %>
           </ul>
+
+          <% else %>
+
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            LOG IN
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= button_to "Sign in", new_user_session_path, class:"dropdown-item" %></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><%= button_to "Sign up", new_user_registration_path, class:"dropdown-item" %></li>
+          </ul>
+
+          <% end %>
         </li>
       </ul>
       <form class="d-flex" role="search">
