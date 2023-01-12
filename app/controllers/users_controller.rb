@@ -8,6 +8,8 @@ class UsersController < ApplicationController
   
     # GET /Users/1 or /Users/1.json
     def show
+      set_user
+      flash.alert = "Check out the user!"
     end
   
     # GET /Users/new
@@ -64,7 +66,7 @@ class UsersController < ApplicationController
       end
   
       # Only allow a list of trusted parameters through.
-      def User_params
+      def user_params
         params.fetch(:user, {})
       end
   end
