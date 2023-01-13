@@ -9,7 +9,6 @@ class UsersController < ApplicationController
     # GET /Users/1 or /Users/1.json
     def show
       set_user
-      flash.alert = "Check out the user!"
     end
   
     # GET /Users/new

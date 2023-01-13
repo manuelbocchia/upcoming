@@ -10,12 +10,12 @@ class EventsController < ApplicationController
   
     # GET /events/1 or /events/1.json
     def show
+      set_event
     end
   
     # GET /events/new
     def new
-      set_user
-      @event = @user.build_event
+      @event = current_user.build_event
     end
   
     # GET /events/1/edit
@@ -24,7 +24,7 @@ class EventsController < ApplicationController
   
     # event /events or /events.json
     def create
-      @event = @user.create_event(event_params)
+      @event = current_user.create_event(event_params)
   
       respond_to do |format|
         if @event.save
@@ -71,7 +71,4 @@ class EventsController < ApplicationController
         params.fetch(:event, {})
       end
 
-      def set_user
-        @user = current_user
-      end
   end
