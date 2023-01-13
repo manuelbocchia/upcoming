@@ -2,4 +2,14 @@
     <h1><%= @user.email %></h1>
 </div>
 
+<div> 
+
+<h2>Events</h2>
+
+<% @user_events = @user.created_events %>
+<%= render @user_events %>
+
+</div>
+
+
 <%= link_to "Edit user",  edit_user_registration_path %>
