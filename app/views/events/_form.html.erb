@@ -1,7 +1,18 @@
 <h2>New Event</h2>
 
-<%= form_for(model: "Event") do |f| %>
-  <%= render "error_messages", resource: resource %>
+<%= form_with(model: @event) do |f| %>
+    
+  <% if @event.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+        <% @event.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
   <div class="field">
     <%= f.label :name %><br />
@@ -9,16 +20,17 @@
   </div>
 
   <div class="field">
-    <%= f.label :place %>
-    <%= f.text_field :place, placeholder: "Event's location", class:"form-control form-control-sm" %>
+    <%= f.label :location %>
+    <%= f.text_field :location, placeholder: "Event's location", class:"form-control form-control-sm" %>
   </div>
 
+    
   <div class="field">
-    <%= f.label :date %><br />
+    <%= f.label :date %>
     <%= f.date_field :date, class:"form-control form-control-sm" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Create event!" %>
   </div>
 <% end %>
