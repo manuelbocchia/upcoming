@@ -20,6 +20,7 @@ class EventsController < ApplicationController
   
     # GET /events/1/edit
     def edit
+      set_event
     end
   
     # event /events or /events.json
@@ -39,6 +40,7 @@ class EventsController < ApplicationController
   
     # PATCH/PUT /events/1 or /events/1.json
     def update
+      set_event
       respond_to do |format|
         if @event.update(event_params)
           format.html { redirect_to event_url(@event), notice: "event was successfully updated." }
@@ -68,7 +70,7 @@ class EventsController < ApplicationController
   
       # Only allow a list of trusted parameters through.
       def event_params
-        params.fetch(:event, {})
+        params.fetch(:event, {}).permit(:name,:location,:date,:creator_id)
       end
 
   end

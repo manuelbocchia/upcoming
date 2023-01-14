@@ -1,3 +1,6 @@
+<div>
+    <img src="https://api.lorem.space/image?w=150&h=180">
+</div>
 <div id="<%= dom_id user %>">
     <h1><%= @user.email %></h1>
 </div>
@@ -7,7 +10,15 @@
 <h2>Events</h2>
 
 <% @user_events = @user.created_events %>
-<%= render @user_events %>
+<div id="Events">
+  <% @user_events.each do |event| %>
+    <p>
+      <h3> <%= event.name %> by <%= event.creator.email %> 
+      <%= link_to "Show this event", event %>
+      </h3>
+    </p>
+  <% end %>
+</div>
 
 </div>
 
