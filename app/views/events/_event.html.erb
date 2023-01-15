@@ -7,3 +7,11 @@
     <a href="#" class="btn btn-primary">Go somewhere</a>
   </div>
 </div>
+
+<h2>Want to attend?</h2>
+
+<%= form_with model: @event_attending do |f| %>
+  <div class="actions">
+    <%= f.submit "Attend event." %>
+  </div>
+<% end %>
