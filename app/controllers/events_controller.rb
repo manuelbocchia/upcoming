@@ -25,7 +25,7 @@ class EventsController < ApplicationController
   
     # event /events or /events.json
     def create
-      @event = current_user.created_events.create(event_params[:event])
+      @event = current_user.created_events.create(event_params)
   
       respond_to do |format|
         if @event.save
@@ -54,6 +54,7 @@ class EventsController < ApplicationController
   
     # DELETE /events/1 or /events/1.json
     def destroy
+      set_event
       @event.destroy
   
       respond_to do |format|
@@ -70,7 +71,7 @@ class EventsController < ApplicationController
   
       # Only allow a list of trusted parameters through.
       def event_params
-        params.fetch(:event, {}).permit(:name,:location,:date,:creator_id)
+        params.require(:event).permit(:name,:location,:date,:creator_id)
       end
 
   end

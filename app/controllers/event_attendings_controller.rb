@@ -7,7 +7,12 @@ class EventAttendingsController < ApplicationController
     end
 
     def create
-        @event_attending = current_user.event_attendings.create(params[:id])
+        @event_attending = current_user.event_attendings.create(attended_events_id: params[:id])
+        if @event_attending.save
+        render "event_attendings/attend"
+        else
+          flash.now[:alert] = "An error occured"
+        end
     end
 
     def update

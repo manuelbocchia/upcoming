@@ -1,6 +1,6 @@
 
-<div class="card" style="width: 18rem;">
-  <img src="https://api.lorem.space/image?w=150&h=180" class="card-img-top" alt="...">
+<div class="card" style="width: 10rem;">
+  <img src="https://api.lorem.space/image?w=100&h=110" class="card-img-top" alt="random generated image">
   <div class="card-body">
     <h5 class="card-title"><%= @event.name %></h5>
     <p class="card-text">This is in <%= @event.location %> on the <%= @event.date %>. <br> Event created by <%= @event.creator.email %> </p>
@@ -10,8 +10,4 @@
 
 <h2>Want to attend?</h2>
 
-<%= form_with model: @event_attending do |f| %>
-  <div class="actions">
-    <%= f.submit "Attend event." %>
-  </div>
-<% end %>
+<%= button_to 'Attend', event_attendings_path(@event), method: :post, confirm: 'really?' %>
