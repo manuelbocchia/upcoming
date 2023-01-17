@@ -7,11 +7,13 @@ class EventAttendingsController < ApplicationController
     end
 
     def create
-        @event_attending = current_user.event_attendings.create(attended_events_id: params[:id])
-        if @event_attending.save
-        render "event_attendings/attend"
+        @event_attending = current_user.event_attendings.create(attended_events_id: params[:format])
+        if @event_attending.save!
+          flash.alert = "You registered!"
+          render "event_attendings/attend"
         else
-          flash.now[:alert] = "An error occured"
+          flash.alert = "An error occured in your registration"
+          redirect_to events_path
         end
     end
 
@@ -28,7 +30,7 @@ class EventAttendingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_attending_params
-      params.fetch(:user, {}).require(:attendee, :attended_events)
+      params.fetch(:user, {}).require(:attendee, :attended_events).permit(:id)
     end
 
 
