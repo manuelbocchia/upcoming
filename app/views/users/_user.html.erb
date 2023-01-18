@@ -7,19 +7,40 @@
 
 <div> 
 
-<h2>Events</h2>
+<h2>Created Events</h2>
 
-<% @user_events = @user.created_events %>
-<div id="Events">
-  <% @user_events.each do |event| %>
-    <p>
-      <h3> <%= event.name %> by <%= event.creator.email %> 
-      <%= link_to "Show this event", event %>
-      </h3>
-    </p>
-  <% end %>
+  <% if @user.created_events.empty? %>
+    <h3><%= @user.email%> hasn't created any events yet!</h3>
+  <% else %>
+    <% @user_events = @user.created_events %>
+    <div id="Events">
+      <% @user_events.each do |event| %>
+        <p>
+          <h3> <%= event.name %> by <%= event.creator.email %> 
+          <%= link_to "Show this event", event %>
+          </h3>
+        </p>
+      <% end %>
+    </div>
+  <%end%>
 </div>
 
+<h2>Attend Events</h2>
+
+  <% if @user.attended_events.empty? %>
+    <h3><%= @user.email%> isn't attendint any events yet!</h3>
+  <% else %>
+    <% @attended_events = @user.attended_events %>
+    <div id="Events">
+      <% @attended_events.each do |event| %>
+        <p>
+          <h3> <%= event.name %> by <%= event.creator.email %> 
+          <%= link_to "Show this event", event %>
+          </h3>
+        </p>
+      <% end %>
+    </div>
+  <%end%>
 </div>
 
 

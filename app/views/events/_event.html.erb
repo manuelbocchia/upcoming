@@ -8,6 +8,20 @@
   </div>
 </div>
 
+<div id="attendees">
+  <% if @event.attendees.empty? %>
+    <h3> No one's confirmed yet... be the first! </h3>
+  <% else %>
+    <% @event.attendees.each do |attendee| %>
+      <p>
+        <h3> <%= attendee.email %> is attending! 
+        <%= link_to "Go to user.", attendee %>
+        </h3>
+      </p>
+    <% end %>
+  <% end %>
+</div>
+
 <h2>Want to attend?</h2>
 
 <%= button_to 'Attend', event_attendings_path(@event), method: :post, confirm: 'really?' %>
